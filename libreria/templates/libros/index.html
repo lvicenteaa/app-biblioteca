@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Lista de libros
+{% endblock %}
+
+{% block contenido %}
+    <div class="card">
+      <div class="card-header">
+        <a href="{% url 'crear' %}" class="btn btn-success" name="" id="" role="button">
+          Agregar nuevo libro
+        </a>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title">Title</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>ISBN</th>
+              <th>Imagen</th>
+              <th>Editorial</th>
+              <th>Año</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for libro in libros %}
+            <tr>
+              <td>{{ libro.id }}</td>
+              <td>{{ libro.titulo }}</td>
+              <td>{{ libro.isbn }}</td>
+              <td>
+                <img src="{{ libro.imagen.url }}" alt="{{ libro.titulo }}" height="100"/>
+              </td>
+              <td>{{ libro.editorial }}</td>
+              <td>{{ libro.anio }}</td>
+              <td>
+                <a href="{% url 'editar' libro.id %}" class="btn btn-info" role="button">Editar</a>
+                |
+                <a href="{% url 'eliminar' libro.id %}" class="btn btn-danger" role="button">Borrar</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="card-footer text-muted"></div>
+    </div>
+{% endblock %}
